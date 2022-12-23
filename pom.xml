@@ -4,7 +4,7 @@
 
 	<groupId>files</groupId>
 	<artifactId>files</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<packaging>pom</packaging>
 
 	<name>files-root-project</name>
@@ -18,7 +18,7 @@
 	</parent>
 
 	<scm>
-		<developerConnection>scm:git:https://github.com/agat-prog/mca-filesmanagement-bpm.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/agat-prog/mca-filesmanagement-files.git</developerConnection>
 		<tag>0.0.1</tag>
 	</scm>
 

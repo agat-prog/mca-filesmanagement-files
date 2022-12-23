@@ -48,7 +48,7 @@ metadata:
   name: files-service
   namespace: {{ .Values.namespace }}
   labels:
-    app: bpm
+    app: files
     release: {{ .Release.Name }}      
 spec:
   type: {{ .Values.service.type }}
