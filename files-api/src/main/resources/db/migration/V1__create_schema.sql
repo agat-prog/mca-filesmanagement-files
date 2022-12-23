@@ -33,11 +33,6 @@ CREATE TABLE IF NOT EXISTS `DOCUMENT` (
 -- Dumping data for table `DOCUMENT`
 --
 
-LOCK TABLES `DOCUMENT` WRITE;
-/*!40000 ALTER TABLE `DOCUMENT` DISABLE KEYS */;
-/*!40000 ALTER TABLE `DOCUMENT` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `FILE`
 --
@@ -65,11 +60,6 @@ CREATE TABLE IF NOT EXISTS `FILE` (
 -- Dumping data for table `FILE`
 --
 
-LOCK TABLES `FILE` WRITE;
-/*!40000 ALTER TABLE `FILE` DISABLE KEYS */;
-/*!40000 ALTER TABLE `FILE` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `FILE_DOCUMENT`
 --
@@ -90,11 +80,6 @@ CREATE TABLE IF NOT EXISTS `FILE_DOCUMENT` (
 -- Dumping data for table `FILE_DOCUMENT`
 --
 
-LOCK TABLES `FILE_DOCUMENT` WRITE;
-/*!40000 ALTER TABLE `FILE_DOCUMENT` DISABLE KEYS */;
-/*!40000 ALTER TABLE `FILE_DOCUMENT` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `INIT_OPTION`
 --
@@ -114,11 +99,8 @@ CREATE TABLE IF NOT EXISTS `INIT_OPTION` (
 -- Dumping data for table `INIT_OPTION`
 --
 
-LOCK TABLES `INIT_OPTION` WRITE;
 INSERT IGNORE INTO `PHASES` SET `ID` = 1, `CODE` = 'SEDE', `DESCRIPTION` = 'Sede electrónica';
 INSERT IGNORE INTO `PHASES` SET `ID` = 2, `CODE` = 'PETICION_DTO', `DESCRIPTION` = 'A petición departamento';
-/*!40000 ALTER TABLE `INIT_OPTION` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `hibernate_sequence`
@@ -136,11 +118,7 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 -- Dumping data for table `hibernate_sequence`
 --
 
-LOCK TABLES `hibernate_sequence` WRITE;
-/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
 INSERT INTO `hibernate_sequence` VALUES (9);
-/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
