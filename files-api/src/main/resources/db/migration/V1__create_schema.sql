@@ -95,16 +95,6 @@ CREATE TABLE IF NOT EXISTS `INIT_OPTION` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `INIT_OPTION`
---
-
-INSERT IGNORE INTO `PHASES` SET `ID` = 1, `CODE` = 'SEDE', `DESCRIPTION` = 'Sede electrónica';
-INSERT IGNORE INTO `PHASES` SET `ID` = 2, `CODE` = 'PETICION_DTO', `DESCRIPTION` = 'A petición departamento';
-
---
--- Table structure for table `hibernate_sequence`
---
 
 DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
