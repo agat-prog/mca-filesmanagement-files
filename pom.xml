@@ -18,7 +18,7 @@
 	</parent>
 
 	<scm>
-		<developerConnection>scm:git:https://github.com/agat-prog/mca-filesmanagement-bpm.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/agat-prog/mca-filesmanagement-files.git</developerConnection>
 		<tag>0.0.1</tag>
 	</scm>
 
