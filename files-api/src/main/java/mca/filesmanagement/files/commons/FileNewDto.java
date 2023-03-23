@@ -1,14 +1,20 @@
 package mca.filesmanagement.files.commons;
 
+/**
+ * DTO con los datos de creación de un expediente.
+ *
+ * @author agat
+ */
 public class FileNewDto {
-	
+
 	private String userName;
 	private String code;
 	private String description;
 	private String archiveName;
 	private String archiveContentBase64;
 	private long initOption;
-	
+
+	/***/
 	public FileNewDto() {
 		super();
 	}

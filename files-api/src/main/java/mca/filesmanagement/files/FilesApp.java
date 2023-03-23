@@ -15,20 +15,28 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 @Import({FilesConfiguration.class})
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class FilesApp {
-	
+
 	@Value("${mca.filesmanagement.files.oauth2.clientid}")
 	private String oauthClientId;
-	
+
 	@Value("${mca.filesmanagement.files.oauth2.clientsecret}")
 	private String oauthSecret;
-	
+
 	@Value("${mca.filesmanagement.files.oauth2.checktokenendpointurl}")
 	private String checkTokenEndPoint;
 
+	/**
+	 * Entrada principal de la aplicación.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(FilesApp.class, args);
 	}
-	
+
+	/**
+	 * Bean correspondiente al servicio remoto de obtención de token en OAuth2.
+	 * @return ResourceServerTokenServices.
+	 */
 	@Bean
 	public ResourceServerTokenServices tokenService() {
 		RemoteTokenServices tokenService = new RemoteTokenServices();

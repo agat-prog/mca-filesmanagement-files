@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>files</groupId>
 		<artifactId>files</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
+		<version>1.0.4-SNAPSHOT</version>
 	</parent>
 	
 	<properties>
@@ -132,7 +132,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>							
+		</dependency>		
+
+		<dependency>
+			<groupId>net.sf.beanrunner</groupId>
+			<artifactId>beanrunner</artifactId>
+			<scope>test</scope>
+			<version>1.0.0</version>
+		</dependency>										
 	</dependencies>
 
 	<build>
@@ -151,26 +158,57 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle-maven-plugin.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.puppycrawl.tools</groupId>
-						<artifactId>checkstyle</artifactId>
-						<version>${checkstyle.version}</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<violationSeverity>error</violationSeverity>
-					<configLocation>google_checks.xml</configLocation>
-					<sourceDirectories>
-						<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-					</sourceDirectories>
-				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<!-- Add this checking -->
+					<execution>
+						<id>jacoco-check</id>
+						<goals>
 							<goal>check</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<exclude>mca/filesmanagement/files/service/CreateFileCommand.class</exclude>
+								<exclude>mca/filesmanagement/files/service/ServiceConfiguration.class</exclude>
+								<exclude>mca/filesmanagement/files/infrastructure/adapter/PublicationService.class</exclude>
+							</excludes>
+							<rules>
+								<rule>
+									<element>PACKAGE</element>
+									<excludes>
+										<exclude>mca.filesmanagement.files</exclude>
+									</excludes>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.85</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>			

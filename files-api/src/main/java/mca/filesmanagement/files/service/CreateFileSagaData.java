@@ -2,22 +2,32 @@ package mca.filesmanagement.files.service;
 
 import mca.filesmanagement.files.commons.FileNewDto;
 
+/**
+ * Clase que contiene los datos de creación de una SAGA de expedientes.
+ *
+ * @author agat
+ */
 public class CreateFileSagaData {
 
 	private String bpmUuid;
 	private String phaseCode;
 	private String docUuid;
 	private FileNewDto fileNewDto;
-	
+
+	/***/
 	public CreateFileSagaData() {
 		super();
-		
+
 		this.fileNewDto = new FileNewDto();
 	}
-	
+
+	/**
+	 * Instancia con un DTO inicializado.
+	 * @param fileNewDto
+	 */
 	public CreateFileSagaData(FileNewDto fileNewDto) {
 		super();
-		
+
 		this.fileNewDto = fileNewDto;
 	}
 
@@ -36,7 +46,7 @@ public class CreateFileSagaData {
 	}
 
 	/**
-	 * @return
+	 * @return phaseCode
 	 * @see mca.filesmanagement.files.commons.FileDetailDto#getPhaseCode()
 	 */
 	public String getPhaseCode() {
@@ -52,7 +62,7 @@ public class CreateFileSagaData {
 	}
 
 	/**
-	 * @return
+	 * @return userName
 	 * @see mca.filesmanagement.files.commons.FileNewDto#getUserName()
 	 */
 	public String getUserName() {
@@ -60,7 +70,7 @@ public class CreateFileSagaData {
 	}
 
 	/**
-	 * @return
+	 * @return code
 	 * @see mca.filesmanagement.files.commons.FileNewDto#getCode()
 	 */
 	public String getCode() {
@@ -68,7 +78,7 @@ public class CreateFileSagaData {
 	}
 
 	/**
-	 * @return
+	 * @return description
 	 * @see mca.filesmanagement.files.commons.FileNewDto#getDescription()
 	 */
 	public String getDescription() {
@@ -76,7 +86,7 @@ public class CreateFileSagaData {
 	}
 
 	/**
-	 * @return
+	 * @return archiveName
 	 * @see mca.filesmanagement.files.commons.FileNewDto#getArchiveName()
 	 */
 	public String getArchiveName() {
@@ -84,7 +94,7 @@ public class CreateFileSagaData {
 	}
 
 	/**
-	 * @return
+	 * @return archiveContentBase64
 	 * @see mca.filesmanagement.files.commons.FileNewDto#getArchiveContentBase64()
 	 */
 	public String getArchiveContentBase64() {
@@ -120,7 +130,7 @@ public class CreateFileSagaData {
 	}
 
 	/**
-	 * @return
+	 * @return initOption
 	 * @see mca.filesmanagement.files.commons.FileNewDto#getInitOption()
 	 */
 	public long getInitOption() {

@@ -6,13 +6,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 //@Configuration
 public class ResourceServerEndpointConfig extends ResourceServerConfigurerAdapter {
 
+	/** Constructor por defecto. */
 	public ResourceServerEndpointConfig() {
 		super();
 	}
-	
+
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		
+
 		//http.authorizeRequests().antMatchers("/api/files/echo").access("hasAuthority('ADMIN')");
 		//.anyRequest();
 		//http.authorizeRequests().antMatchers("/api/files/echo").access("isAuthenticated()");

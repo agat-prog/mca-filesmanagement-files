@@ -14,7 +14,6 @@ import bpm.api.messaging.commands.DeleteBpmCommand;
 import bpm.api.messaging.replies.BpmCreatedEvent;
 import docs.api.messaging.commands.CreateDocCommand;
 import docs.api.messaging.commands.DeleteDocCommand;
-import docs.api.messaging.commands.DocsChannels;
 import docs.api.messaging.replies.DocCreatedEvent;
 import io.eventuate.tram.commands.consumer.CommandWithDestination;
 import io.eventuate.tram.sagas.orchestration.SagaDefinition;
@@ -22,24 +21,39 @@ import io.eventuate.tram.sagas.simpledsl.SimpleSaga;
 import mca.filesmanagement.files.domain.usescases.CreateFileParams;
 import mca.filesmanagement.files.port.in.IFilesUseCase;
 
+/**
+ * Comando de creación de un expediente.
+ *
+ * @author agat
+ */
 public class CreateFileCommand implements SimpleSaga<CreateFileSagaData> {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(CreateFileCommand.class);
-	
+	/** Logger. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(CreateFileCommand.class);
+
 	private IFilesUseCase filesUseCase;
-	
+
+	/**
+	 * Instancia un comando de creación de un expediente inyectando el servicio
+	 * de casos de uso de expedientes.
+	 *
+	 * @param filesUseCase
+	 */
 	public CreateFileCommand(IFilesUseCase filesUseCase) {
 		super();
-		
+
 		this.filesUseCase = filesUseCase;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public SagaDefinition<CreateFileSagaData> getSagaDefinition() {
 		return this.sagaDefinition;
 	}
-	
-	private SagaDefinition<CreateFileSagaData> sagaDefinition = 
+
+	private SagaDefinition<CreateFileSagaData> sagaDefinition =
 			step()
 				.invokeLocal(this::create)
 				.withCompensation(this::reject)
@@ -54,30 +68,30 @@ public class CreateFileCommand implements SimpleSaga<CreateFileSagaData> {
 			.step()
 				.invokeLocal(this::approve)
 			.build();
-	 
+
 	private CommandWithDestination createDocProcess(CreateFileSagaData data) {
 		LOGGER.info("createDocProcess --> Enviando datos a DOCS");
-		
+
 		CreateDocCommand command = new CreateDocCommand();
 		command.setName(data.getArchiveName());
 		command.setContentBase64(data.getArchiveContentBase64());
 		command.setUser(data.getUserName());
 		return send(command).to(CHANNEL_DOCS_SERVICE).build();
 	}
-	
+
 	private void onDocCreatedProcess(CreateFileSagaData data, DocCreatedEvent event) {
 		LOGGER.info("onDocCreatedProcess UUID --> " + event.getUuid().toString());
-	
+
 		data.setDocUuid(event.getUuid().toString());
 	}
-	
+
 	private CommandWithDestination deleteDocument(CreateFileSagaData data) {
 		LOGGER.info("deleteDocument --> Enviando eliminación datos a DOCS");
-		return send(new DeleteDocCommand(UUID.fromString(data.getDocUuid()))).to(DocsChannels.CHANNEL_DOCS_SERVICE).build();
+		return send(new DeleteDocCommand(UUID.fromString(data.getDocUuid()))).to(CHANNEL_DOCS_SERVICE).build();
 	}
-	
+
 	private void create(CreateFileSagaData data) {
-		LOGGER.info("create --> Creando expediente:");
+		LOGGER.info(String.format("create --> Creando expediente: %s", data));
 	}
 
 	private CommandWithDestination createBpmProcess(CreateFileSagaData data) {
@@ -86,20 +100,20 @@ public class CreateFileCommand implements SimpleSaga<CreateFileSagaData> {
 		command.setUser(data.getUserName());
 		return send(command).to(BpmChannels.CHANNEL_BPM_SERVICE).build();
 	}
-	
+
 	private void reject(CreateFileSagaData data) {
 		LOGGER.info("reject --> Eliminando expediente -->" + data.getCode());
-		
+
 		this.filesUseCase.deleteByCode(data.getCode());
 	}
-	
+
 	private void onBpmCreatedProcess(CreateFileSagaData data, BpmCreatedEvent event) {
 		LOGGER.info("onBpmCreatedProcess UUID --> " + event.getUuid().toString());
-	
+
 		data.setBpmUuid(event.getUuid().toString());
 		data.setPhaseCode(event.getPhase());
 	}
-	
+
 	private CommandWithDestination deleteBpmProcess(CreateFileSagaData data) {
 		LOGGER.info("deleteBpmProcess --> Enviando eliminación datos a BPM");
 		return send(new DeleteBpmCommand(UUID.fromString(data.getBpmUuid()))).to(BpmChannels.CHANNEL_BPM_SERVICE).build();
@@ -108,7 +122,7 @@ public class CreateFileCommand implements SimpleSaga<CreateFileSagaData> {
 	private void approve(CreateFileSagaData data) {
 		CreateFileParams params = new CreateFileParams(data.getInitOption(), data.getCode(), data.getDescription(), data.getPhaseCode(), data.getBpmUuid(), data.getDocUuid());
 		this.filesUseCase.createFile(data.getUserName(), params);
-		
+
 		LOGGER.info("approve --> APROBADO !!!!!--> BPM uuid:" + data.getBpmUuid() + "; DOC uuid:" + data.getDocUuid());
 	}
 }

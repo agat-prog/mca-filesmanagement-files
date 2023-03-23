@@ -7,7 +7,8 @@ public class FileUpdatedEvent implements FileDomainEvent {
 	private boolean active;
 	private String description;
 	private String processCode;
-	
+
+	/***/
 	public FileUpdatedEvent() {
 		super();
 	}
@@ -82,10 +83,12 @@ public class FileUpdatedEvent implements FileDomainEvent {
 		this.processCode = processCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return String.format("FileUpdatedEvent [code=%s, initOption=%s, active=%s, description=%s, processCode=%s]",
 				code, initOption, active, description, processCode);
 	}
-	
 }

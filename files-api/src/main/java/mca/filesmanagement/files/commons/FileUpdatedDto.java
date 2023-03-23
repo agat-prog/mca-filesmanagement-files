@@ -1,11 +1,17 @@
 package mca.filesmanagement.files.commons;
 
+/**
+ * DTO con los datos de actualización de un expediente.
+ *
+ * @author agat
+ */
 public class FileUpdatedDto {
-	
+
 	private String code;
 	private String description;
 	private Long initialOption;
-	
+
+	/***/
 	public FileUpdatedDto() {
 		super();
 	}

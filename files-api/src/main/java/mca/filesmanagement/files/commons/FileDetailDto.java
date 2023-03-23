@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileDetailDto{
-	
+
 	private Long id;
 	private String userName;
 	private String code;
@@ -15,6 +15,7 @@ public class FileDetailDto{
 	private boolean finished;
 	private List<String> documents = new ArrayList<>(0);
 
+	/***/
 	public FileDetailDto() {
 		super();
 	}
@@ -123,7 +124,11 @@ public class FileDetailDto{
 	public List<String> getDocuments() {
 		return documents;
 	}
-	
+
+	/**
+	 * Añade un código de documento a la lista vinculada.
+	 * @param document
+	 */
 	public void addDocument(String document) {
 		this.documents.add(document);
 	}

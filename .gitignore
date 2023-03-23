@@ -3,3 +3,4 @@
 .settings/
 files-api/.classpath
 files-api-messaging/.classpath
+.checkstyle

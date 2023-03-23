@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entidad de JPA de un documento.
+ *
+ * @author agat
+ */
 @Entity
 @Table(name = "DOCUMENT")
 public class DocumentEntity {
@@ -15,17 +20,22 @@ public class DocumentEntity {
 	@Column (name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column (name = "CODE", nullable = false, updatable = false, unique = true)
 	private String code;
-	
+
+	/***/
 	public DocumentEntity() {
 		super();
 	}
-	
+
+	/**
+	 * Crea una instancia con el código inicializado.
+	 * @param code Código único del documento.
+	 */
 	public DocumentEntity(String code) {
 		super();
-		
+
 		this.code = code;
 	}
 
