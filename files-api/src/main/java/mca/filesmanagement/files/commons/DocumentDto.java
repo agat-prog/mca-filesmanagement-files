@@ -1,17 +1,22 @@
 package mca.filesmanagement.files.commons;
 
 public class DocumentDto {
-	
+
 	private Long id;
 	private String code;
 	private String name;
 	private String contentBase64;
 	private String originPath;
 
+	/***/
 	public DocumentDto() {
 		super();
 	}
-	
+
+	/**
+	 * Crea una instancia del DTO de documento inicializando el código.
+	 * @param code Código único del documento.
+	 */
 	public DocumentDto(String code) {
 		super();
 		this.code = code;
@@ -67,7 +72,7 @@ public class DocumentDto {
 	}
 
 	/**
-	 * @param uuid the code to set
+	 * @param code the code to set
 	 */
 	public void setCode(String code) {
 		this.code = code;

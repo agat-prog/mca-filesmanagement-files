@@ -1,11 +1,17 @@
 package mca.filesmanagement.files.commons;
 
+/**
+ * DTO de la opción de inicio de un expediente.
+ *
+ * @author agat
+ */
 public class InitialOptionDto {
 
 	private Long id;
 	private String description;
 	private String code;
-	
+
+	/***/
 	public InitialOptionDto() {
 		super();
 	}

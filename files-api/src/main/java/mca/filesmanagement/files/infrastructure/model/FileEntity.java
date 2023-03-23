@@ -14,6 +14,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Entidad de JPA de un expediente.
+ *
+ * @author agat
+ */
 @Entity
 @Table(name = "FILE")
 public class FileEntity {
@@ -22,19 +27,19 @@ public class FileEntity {
 	@Column (name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column (name = "ID_INIT_OPTION", nullable = false)
 	private long initOption;
-	
+
 	@Column (name = "USER", nullable = false, updatable = false)
 	private String user;
-	
+
 	@Column (name = "ACTIVE")
 	private boolean active;
-	
+
 	@Column (name = "CODE", nullable = false, updatable = false)
 	private String code;
-	
+
 	@Column (name = "DESCRIPTION")
 	private String description;
 
@@ -42,8 +47,8 @@ public class FileEntity {
 	private String phaseActual;
 
 	@Column (name = "PROCES_CODE", nullable = false, updatable = false)
-	private String proces;	
-	
+	private String proces;
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinTable (
 			name = "FILE_DOCUMENT"
@@ -51,7 +56,8 @@ public class FileEntity {
 			, inverseJoinColumns = {@JoinColumn(name="DOCUMENT_ID")}
 	)
 	private List<DocumentEntity> documents = new ArrayList<>(0);
-	
+
+	/***/
 	public FileEntity() {
 		super();
 	}

@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entidad de JPA de la maestra de formas de inicio.
+ *
+ * @author agat
+ */
 @Entity
 @Table(name = "INIT_OPTION")
 public class InitialOptionEntity {
@@ -15,13 +20,14 @@ public class InitialOptionEntity {
 	@Column (name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column (name = "CODE", nullable = false, updatable = false, unique = true)
 	private String code;
-	
+
 	@Column (name = "DESCRIPTION", nullable = false, updatable = false)
 	private String description;
-	
+
+	/***/
 	public InitialOptionEntity() {
 		super();
 	}

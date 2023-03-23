@@ -18,11 +18,20 @@ import mca.filesmanagement.files.service.ServiceConfiguration;
 @Import({OptimisticLockingDecoratorConfiguration.class, ServiceConfiguration.class})
 public class FilesConfiguration {
 
+	/**
+	 * Bean correspondiente al comando de creación de expedientes.
+	 * @param filesUseCase Servicio con la implementación de los casos de uso de expedientes.
+	 * @return CreateFileCommand
+	 */
 	@Bean
 	public CreateFileCommand createFileCommand(IFilesUseCase filesUseCase) {
 		return new CreateFileCommand(filesUseCase);
 	}
-	
+
+	/**
+	 * Mapper para la transformación de DTO.
+	 * @return ModelMapper
+	 */
 	@Bean
 	public ModelMapper modelMapper() {
 	    return new ModelMapper();

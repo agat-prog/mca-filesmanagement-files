@@ -12,18 +12,35 @@ import io.eventuate.tram.events.publisher.DomainEventPublisher;
 import mca.filesmanagement.files.domain.files.FileAggregate;
 import mca.filesmanagement.files.port.out.IPublicationService;
 
+/**
+ * Servicio de publicación de eventos para el agregado de expedientes.
+ *
+ * @author agat
+ */
 @Service
-public class PublicationService extends AbstractAggregateDomainEventPublisher<FileAggregate, FileDomainEvent> implements IPublicationService {
+public class PublicationService
+		extends
+			AbstractAggregateDomainEventPublisher<FileAggregate, FileDomainEvent>
+		implements
+			IPublicationService {
 
-	private static Logger LOG = LoggerFactory.getLogger(PublicationService.class);
-	
+	private static Logger LOG = LoggerFactory
+			.getLogger(PublicationService.class);
+
+	/**
+	 * Crea una instancia de un servicio de publicación inyectando el Publisher de eventuate.
+	 * @param eventPublisher DomainEventPublisher.
+	 */
 	public PublicationService(DomainEventPublisher eventPublisher) {
 		super(eventPublisher, FileAggregate.class, FileAggregate::getId);
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void notify(FileAggregate aggregate, FileDomainEvent event) {
-		LOG.info("NotificationService.notify: "+ aggregate.getId());
+		LOG.info("NotificationService.notify: " + aggregate.getId());
 		this.publish(aggregate, Arrays.asList(event));
 	}
 }
