@@ -18,15 +18,6 @@ pipeline {
     }
     
     stages {
-        stage('Print environment') {
-            steps {
-                echo "env.BRANCH_NAME -- ${env.BRANCH_NAME}"
-                echo "NAMESPACE -- ${NAMESPACE}"
-                echo "REGISTRY -- ${REGISTRY}"
-                echo "BUILD -- ${BUILD}"
-                echo "DEPLOY -- ${DEPLOY}"
-            }
-        }    
         stage('Unit Test') {
             steps {
                 script {
