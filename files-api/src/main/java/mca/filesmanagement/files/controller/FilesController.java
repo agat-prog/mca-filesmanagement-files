@@ -30,7 +30,7 @@ import mca.filesmanagement.files.service.FilesService;
 public class FilesController extends AbstractController {
 
 	/** Logger. */
-	private static Logger LOGGER = LoggerFactory.getLogger(FilesController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FilesController.class);
 
 	@Autowired
 	private FilesService filesService;

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>files</groupId>
 		<artifactId>files</artifactId>
-		<version>1.0.5-SNAPSHOT</version>
+		<version>1.0.6</version>
 	</parent>
 	
 	<properties>
@@ -14,16 +14,25 @@
 	</properties>	
 
 	<dependencies>
+		<!-- 
+			Dependencia necesaria para el envío de métricas a 
+			prometheus.
+		-->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
+	
 		<dependency>
 			<groupId>bpm</groupId>
 			<artifactId>bpm-api-messaging</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.6</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>docs</groupId>
 			<artifactId>docs-api-messaging</artifactId>
-			<version>1.0.7</version>
+			<version>1.0.19</version>
 		</dependency>	
 		
 		<dependency>

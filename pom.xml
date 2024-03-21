@@ -4,7 +4,7 @@
 
 	<groupId>files</groupId>
 	<artifactId>files</artifactId>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.6</version>
 	<packaging>pom</packaging>
 
 	<name>files-root-project</name>
@@ -34,7 +34,7 @@
 	
 	<repositories>
 		<repository>
-			<id>filesmanagements-repository</id>
+			<id>nexus-dev-ops-repository</id>
 			<name>Artifactory para dependencias Release</name>
 			<url>http://mapeado-settings</url>
 			<layout>default</layout>		
@@ -46,13 +46,13 @@
 		<repository>
 			<id>release-artifacts-repository</id>
 			<name>Artifactory para dependencias Release</name>
-			<url>http://artifactory:8081/artifactory/libs-release/</url>
+			<url>http://nexus.dev-ops/repository/maven-releases/</url>
 			<layout>default</layout>
 		</repository>
 		<snapshotRepository>
 			<id>snapshot-artifacts-repository</id>
 			<name>Artifactory para dependencias snapshot</name>
-			<url>http://artifactory:8081/artifactory/libs-snapshot/</url>
+			<url>http://nexus.dev-ops/repository/maven-snapshots/</url>
 			<layout>default</layout>
 		</snapshotRepository>
 	</distributionManagement>
@@ -61,7 +61,6 @@
 		<module>files-api-messaging</module>
 		<module>files-api</module>
 	</modules>
-	
 	
 	<build>
 		<pluginManagement>
