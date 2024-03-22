@@ -69,7 +69,7 @@ pipeline {
 			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
 		            	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
 		            		echo "version -- ${REGISTRY}" 
-		                	sh "mvn -f files-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=${user} -Djib.to.auth.password=${pass}"                
+		                	sh "mvn -s $MAVEN_SETTINGS -f files-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=${user} -Djib.to.auth.password=${pass}"                
 		            	}  
 			    }            
             }
@@ -85,7 +85,7 @@ pipeline {
                 }
             }  
             steps {
-                sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='${pomVersion}' --set mysql.host=${MYSQL_HOST} --set zookeeper.host=${ZOOKEEPER_HOST} files-release helm/"
+                # sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='${pomVersion}' --set mysql.host=${MYSQL_HOST} --set zookeeper.host=${ZOOKEEPER_HOST} files-release helm/"
             }
         }              
     }
