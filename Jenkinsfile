@@ -27,7 +27,7 @@ pipeline {
                 echo "BUILD -- ${BUILD}"
                 echo "DEPLOY -- ${DEPLOY}" 
                 echo "version -- ${pomVersion}"    
-                sh "mvn clean test -Dmaven.wagon.http.ssl.insecure=true"                
+                sh "mvn clean test -U"                
             }
         }
         stage('Deploy dependencies') {
