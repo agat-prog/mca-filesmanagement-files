@@ -36,7 +36,7 @@
 		<repository>
 			<id>nexus-dev-ops-repository</id>
 			<name>Artifactory para dependencias Release</name>
-			<url>http://mapeado-settings</url>
+			<url>http://nexus-service/repository</url>
 			<layout>default</layout>		
 			<releases></releases>	
 		</repository>
