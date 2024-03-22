@@ -65,10 +65,13 @@ pipeline {
                 environment name: 'BUILD', value: 'true'
             }
             steps {
-            	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
-            		echo "version -- ${REGISTRY}" 
-                	sh "mvn -f files-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=${user} -Djib.to.auth.password=${pass}"                
-            	}            
+			    configFileProvider(
+			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
+		            	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
+		            		echo "version -- ${REGISTRY}" 
+		                	sh "mvn -f files-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=${user} -Djib.to.auth.password=${pass}"                
+		            	}  
+			    }            
             }
         }  
         stage('Deploy into Kubernetes') {
