@@ -27,7 +27,10 @@ pipeline {
                 echo "BUILD -- ${BUILD}"
                 echo "DEPLOY -- ${DEPLOY}" 
                 echo "version -- ${pomVersion}"    
-                sh "mvn clean test -Dmaven.wagon.http.ssl.allowall=true"                
+			    configFileProvider(
+			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
+			        sh "mvn clean test"
+			    }               
             }
         }
         stage('Deploy dependencies') {
