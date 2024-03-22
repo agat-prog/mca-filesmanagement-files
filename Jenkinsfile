@@ -28,8 +28,8 @@ pipeline {
                 echo "DEPLOY -- ${DEPLOY}" 
                 echo "version -- ${pomVersion}"    
 			    configFileProvider(
-			        [configFile(fileId: 'files-maven-config-file_XXX', variable: 'MAVEN_SETTINGS')]) {
-			        sh "mvn clean test"
+			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
+			        sh "mvn clean test -U"
 			    }               
             }
         }
