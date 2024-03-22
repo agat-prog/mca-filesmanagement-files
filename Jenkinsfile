@@ -29,7 +29,7 @@ pipeline {
                 echo "version -- ${pomVersion}"    
 			    configFileProvider(
 			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
-			        sh "mvn clean test -U"
+			        sh "mvn -s $MAVEN_SETTINGS clean test -U"
 			    }               
             }
         }
