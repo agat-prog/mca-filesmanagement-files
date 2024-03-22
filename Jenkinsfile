@@ -46,12 +46,18 @@ pipeline {
         }   
         stage('PMD') {
             steps {
-                sh "mvn pmd:check"                
+			    configFileProvider(
+			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
+			        sh 'mvn -s $MAVEN_SETTINGS pmd:check'
+			    }             
             }
         }      
         stage('Coverage check') {
             steps {
-                sh "mvn verify"                
+			    configFileProvider(
+			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
+			        sh 'mvn -s $MAVEN_SETTINGS verify'
+			    }                              
             }
         }               
         stage('Build image') {
