@@ -27,7 +27,7 @@ pipeline {
                 echo "BUILD -- ${BUILD}"
                 echo "DEPLOY -- ${DEPLOY}" 
                 echo "version -- ${pomVersion}"    
-                sh "mvn clean test"                
+                sh "mvn clean test -Dmaven.wagon.http.ssl.insecure=true"                
             }
         }
         stage('Deploy dependencies') {
@@ -37,7 +37,7 @@ pipeline {
             steps {    
 			    configFileProvider(
 			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
-			        sh 'mvn -s $MAVEN_SETTINGS deploy -DskipTests'
+			        sh 'mvn -s $MAVEN_SETTINGS deploy -DskipTests -Dmaven.wagon.http.ssl.insecure=true'
 			    }            
             }
         }   
