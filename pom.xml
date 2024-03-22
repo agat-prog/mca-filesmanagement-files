@@ -32,19 +32,16 @@
 		<project.scm.id>github-server-oauth2</project.scm.id>
 	</properties>
 	
-	<!-- 
 	<repositories>
 		<repository>
 			<id>nexus-dev-ops-repository</id>
 			<name>Artifactory para dependencias Release</name>
-			
 			<url>http://nexus-service/repository</url>
 			<layout>default</layout>		
-			<releases></releases>	
-			
+			<releases></releases>			
 		</repository>
 	</repositories>
--->
+
 	<distributionManagement>
 		<repository>
 			<id>release-artifacts-repository</id>
