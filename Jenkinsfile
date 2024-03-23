@@ -33,17 +33,6 @@ pipeline {
 			    }               
             }
         }
-        stage('Deploy dependencies') {
-            when {
-                environment name: 'BUILD', value: 'true'
-            }        
-            steps {    
-			    configFileProvider(
-			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
-			        sh 'mvn -s $MAVEN_SETTINGS deploy -DskipTests -Dmaven.wagon.http.ssl.allowall=true'
-			    }            
-            }
-        }   
         stage('PMD') {
             steps {
 			    configFileProvider(
@@ -59,7 +48,18 @@ pipeline {
 			        sh 'mvn -s $MAVEN_SETTINGS verify'
 			    }                              
             }
-        }               
+        }   
+        stage('Deploy dependencies') {
+            when {
+                environment name: 'BUILD', value: 'true'
+            }        
+            steps {    
+			    configFileProvider(
+			        [configFile(fileId: 'files-maven-config-file', variable: 'MAVEN_SETTINGS')]) {
+			        sh 'mvn -s $MAVEN_SETTINGS deploy -DskipTests -Dmaven.wagon.http.ssl.allowall=true'
+			    }            
+            }
+        }                     
         stage('Build image') {
             when {
                 environment name: 'BUILD', value: 'true'
